@@ -1097,8 +1097,8 @@ Answer: ***134807384045900908033398316492384543761831897449706831299097660788777
 
 Smallest exponent should be fastest,right?
 
-- [salty.py]()
-- [output.txt]()
+- [salty.py](https://github.com/Divyanshukumar20/CSOC24/blob/main/Week2/Writeup_files/salty_9854bdcadc3f8b8f58008a24d392c1bf.py)
+- [output.txt](https://github.com/Divyanshukumar20/CSOC24/blob/main/Week2/Writeup_files/output_95f558e889cc66920c24a961f1fb8181.txt)
 
 ##### Writeup:
 
