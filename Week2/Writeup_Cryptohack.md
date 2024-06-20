@@ -910,7 +910,128 @@ Answer: ***882564595536224140639625987657529300394956519977044270821168***
 
 ---
 
-### RSA Starter 3
+### RSA Starter 4
 
 ##### Challenge Description:
+The private key d is used to decrypt ciphertexts created with the corresponding public key (it's also used to "sign" a message but we'll get to that later).
+
+The private key is the secret piece of information or "trapdoor" which allows us to quickly invert the encryption function. If RSA is implemented well, if you do not have the private key the fastest way to decrypt the ciphertext is to first factorise the modulus.
+
+In RSA the private key is the modular multiplicative inverse of the exponent e modulo the totient of N.
+
+Given the two primes:
+
+p = 857504083339712752489993810777
+
+q = 1029224947942998075080348647219
+
+and the exponent:
+
+e = 65537
+
+What is the private key d?
+
+##### Writeup:
+
+We can find the private key d using public key e.
+
+We know that d ≡ e<sup>-1</sup> mod ϕ(n),where ϕ(n) is the totient of n.
+
+Thus,
+```python
+#!/usr/bin/env python3
+p =857504083339712752489993810777
+q = 1029224947942998075080348647219
+e = 65537
+
+totient = (p-1)*(q-1)
+
+d= pow(e,-1,totient)
+print (d)
+```
+
+```shell
+┌──(rinshu㉿kali)-[~]
+└─$ ./rsa4.py   
+121832886702415731577073962957377780195510499965398469843281
+```
+d = ***121832886702415731577073962957377780195510499965398469843281***
+
+---
+
+### RSA Starter 5
+
+##### Challenge Description:
+
+I've encrypted a secret number for your eyes only using your public key parameters:
+
+N = 882564595536224140639625987659416029426239230804614613279163
+
+e = 65537
+
+Use the private key that you found for these parameters in the previous challenge to decrypt this ciphertext:
+
+c = 77578995801157823671636298847186723593814843845525223303932
+
+##### Writeup:
+
+We know the private key here as d = *121832886702415731577073962957377780195510499965398469843281*
+
+To decrypt the ciphertext we use this formula
+
+message = c<sup>d</sup> mod n
+```python
+#!/usr/bin/env python3
+n = 882564595536224140639625987659416029426239230804614613279163
+p = 857504083339712752489993810777
+q = 1029224947942998075080348647219
+e = 65537
+
+totient = (p-1)*(q-1)
+d= pow(e,-1,totient)
+
+c= 77578995801157823671636298847186723593814843845525223303932
+
+message = pow(c,d,n)
+
+print (message)
+
+```
+
+```shell
+┌──(rinshu㉿kali)-[~]
+└─$ ./decrypt.py   
+13371337
+
+```
+Answer: ***13371337***
+
+---
+
+### RSA Starter 6
+
+##### Challenge Description:
+
+How can you ensure that the person receiving your message knows that you wrote it?
+
+You've been asked out on a date, and you want to send a message telling them that you'd love to go, however a jealous lover isn't so happy about this.
+
+When you send your message saying yes, your jealous lover intercepts the message and corrupts it so it now says no!
+
+We can protect against these attacks by signing the message.
+
+Imagine you write a message M. You encrypt this message with your friend's public key:C = M<sup>e<sub>0</sub></sup> mod N<sub>0</sub>.
+
+To sign this message, you calculate the hash of the message: H(M) and "encrypt" this with your private key: S = H(M)<sup>d<sub>1</sub></sup> mod N<sub>1</sub>.
+
+Your friend can decrypt the message using their private key: m = C<sup>d<sub>0</sub></sup> mod N<sub>0</sub>. Using your public key they calculate s = S<sup>e<sub>1</sub></sup> mod N<sup>1</sup>.
+
+Now by computing H(m) and comparing it to s: assert H(m) == s, they can ensure that the message you sent them, is the message that they received!
+
+Sign the flag crypto{Immut4ble_m3ssag1ng} using your private key and the SHA256 hash function.
+
+Challenge files:
+  - [private.key]()
+
+##### Writeup:
 
