@@ -705,4 +705,98 @@ d = 9
 
 Answer:- ***9***
 
+### SYMMETRIC CIPHERS
+
+### Keyed Permutations
+
+##### Challenge Description:
+
+AES, like all good block ciphers, performs a "keyed permutation". This means that it maps every possible input block to a unique output block, with a key determining which permutation to perform.
+
+Using the same key, the permutation can be performed in reverse, mapping the output block back to the original input block. It is important that there is a one-to-one correspondence between input and output blocks, otherwise we wouldn't be able to rely on the ciphertext to decrypt back to the same plaintext we started with.
+
+What is the mathematical term for a one-to-one correspondence?
+
+##### Writeup:
+
+Generally one-to-one correspondance in terms of mathematics is **bijection**
+
+Answer: crypto{bijection}
+
+---
+
+### Resisting Bruteforce
+
+##### Challenge Description:
+
+If a block cipher is secure, there should be no way for an attacker to distinguish the output of AES from a random permutation of bits. Furthermore, there should be no better way to undo the permutation than simply bruteforcing every possible key. That's why academics consider a cipher theoretically "broken" if they can find an attack that takes fewer steps to perform than bruteforcing the key, even if that attack is practically infeasible.
+
+It turns out that there is [an attack](https://en.wikipedia.org/wiki/Biclique_attack) on AES that's better than bruteforce, but only slightly – it lowers the security level of AES-128 down to 126.1 bits, and hasn't been improved on for over 8 years. Given the large "security margin" provided by 128 bits, and the lack of improvements despite extensive study, it's not considered a credible risk to the security of AES. But yes, in a very narrow sense, it "breaks" AES.
+
+Finally, while quantum computers have the potential to completely break popular public-key cryptosystems like RSA via Shor's algorithm, they are thought to only cut in half the security level of symmetric cryptosystems via Grover's algorithm. This is one reason why people recommend using AES-256, despite it being less performant, as it would still provide a very adequate 128 bits of security in a quantum future.
+
+What is the name for the best single-key attack against AES?
+
+##### Writeup:
+
+If we get the link given in the challenge we got to know your answer.
+
+Answer: ***crypto{Biclique}***
+
+---
+
+### Structure of AES
+
+To achieve a keyed permutation that is infeasible to invert without the key, AES applies a large number of ad-hoc mixing operations on the input. This is in stark contrast to public-key cryptosystems like RSA, which are based on elegant individual mathematical problems. AES is much less elegant, but it's very fast.
+
+At a high level, AES-128 begins with a "key schedule" and then runs 10 rounds over a state. The starting state is just the plaintext block that we want to encrypt, represented as a 4x4 matrix of bytes. Over the course of the 10 rounds, the state is repeatedly modified by a number of invertible transformations.
+
+Included is a bytes2matrix function for converting our initial plaintext block into a state matrix. Write a matrix2bytes function to turn that matrix back into bytes, and submit the resulting plaintext as the flag.
+
+Challenge files:
+  - [matrix.py](https://github.com/Divyanshukumar20/CSOC24/blob/main/Week2/Writeup_files/matrix_e1b463dddbee6d17959618cf370ff1a5.py)
+
+### Writeup:
+
+As seen in the file we got a python script which is not completed.We havre to complete it.
+bytes2matrix is given we have to find the matrix2 bytes function.
+
+It's simple we just have change each value of integere in matrix to get the ASCII character and just add them.
+We get our flag.
+
+Complete python script
+
+```python
+#!/usr/bin/env python3
+#def bytes2matrix(text):
+#    """ Converts a 16-byte array into a 4x4 matrix.  """
+#    return [list(text[i:i+4]) for i in range(0, len(text), 4)]
+
+def matrix2bytes(matrix):
+    text = ""
+    """ Converts a 4x4 matrix into a 16-byte array.  """
+    for i in range(0,4):
+     for j in range(0,4):
+       text += chr(matrix[i][j])
+    return (text)
+matrix = [
+    [99, 114, 121, 112],
+    [116, 111, 123, 105],
+    [110, 109, 97, 116],
+    [114, 105, 120, 125],
+]
+
+print (matrix2bytes(matrix))
+                             
+```
+```shell
+┌──(rinshu㉿kali)-[~]
+└─$ ./matrix_e1b463dddbee6d17959618cf370ff1a5.py
+crypto{inmatrix}
+```
+We get the flag as **`crypto{inmatrix}`**
+
+
+
+
 
