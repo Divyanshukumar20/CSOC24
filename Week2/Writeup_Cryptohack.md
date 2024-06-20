@@ -1040,7 +1040,7 @@ Here we have to sign the flag using given private and SHA256 hash function and s
 First we convert the flag to its hash value and then convert thst value into integer.
 
 We use hashlib library to get the hash value.
-After getting the hash value from SHA256 hash we convert it to bytes to get the integer and then this bytes is converted in long integer using 'bytes_to_long()' function.
+After getting the hash value from SHA256 hash we convert it into bytes to get the integer and then this bytes is converted in long integer using `bytes_to_long()` function.
 ```python
 #!/usr/bin/env python3
 from Crypto.Util.number import bytes_to_long
@@ -1065,7 +1065,7 @@ print (integer)
 
 ```
 
-At final we get our hash value as integer is *69523276807549773371481917516452638375664281433555793080445569568100703974091*
+Finally, we get our hash value as integer is *69523276807549773371481917516452638375664281433555793080445569568100703974091*
 
 Sign this integer using formula given in challenge using private key given.
 ```python
