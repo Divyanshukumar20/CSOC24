@@ -868,3 +868,49 @@ print (result)
 301
 ```
 Answer = ***301***
+
+### RSA Starter 3
+
+##### Challenge Description:
+
+RSA relies on the difficulty of the factorisation of the modulus N. If the primes can be found then we can calculate the Euler totient of N and thus decrypt the ciphertext.
+
+Given N = p*q and two primes:
+
+p = 857504083339712752489993810777
+
+q = 1029224947942998075080348647219
+
+What is the totient of N?
+
+##### Writeup:
+
+Totient of n counts the positive integers up to n that are relatively prime to n.
+
+If n is written as prime factor of two number p and q then the formula for totient is (p-1)*(q-1).
+
+Thus,
+```python
+#!/usr/bin/env python3
+p = 857504083339712752489993810777
+q = 1029224947942998075080348647219
+
+totient = (p-1)*(q-1)
+
+print (totient)
+
+```
+```shell
+┌──(rinshu㉿kali)-[~]
+└─$ ./totient.py 
+882564595536224140639625987657529300394956519977044270821168
+
+```
+Answer: ***882564595536224140639625987657529300394956519977044270821168***
+
+---
+
+### RSA Starter 3
+
+##### Challenge Description:
+
