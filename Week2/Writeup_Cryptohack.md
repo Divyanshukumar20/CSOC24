@@ -33,7 +33,7 @@ Of all modern programming languages, Python 3 stands out as ideal for quickly wr
 Run the attached Python script and it will output your flag.
 
 Challenge files:
-  - [great_snakes.py]()
+  - [great_snakes.py](https://github.com/Divyanshukumar20/CSOC24/blob/main/Week2/Writeup_files/great_snakes_35381fca29d68d8f3f25c9fa0a9026fb.py)
 
 ##### Writeup:
 
