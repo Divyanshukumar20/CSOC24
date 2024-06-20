@@ -486,3 +486,223 @@ b'crypto{1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll}'
 
 ```
 Yes, We are correct Here we get our flag as **`crypto{1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll}`**
+
+---
+
+ ### MATHEMATICS
+
+ ### Greatest Common Divisor
+
+ ##### Challenge Description:
+
+ 34 Solves · 90 Solutions
+The Greatest Common Divisor (GCD), sometimes known as the highest common factor, is the largest number which divides two positive integers (a,b).
+
+For a = 12, b = 8 we can calculate the divisors of a: {1,2,3,4,6,12} and the divisors of b: {1,2,4,8}. Comparing these two, we see that gcd(a,b) = 4.
+
+Now imagine we take a = 11, b = 17. Both a and b are prime numbers. As a prime number has only itself and 1 as divisors, gcd(a,b) = 1.
+
+We say that for any two integers a,b, if gcd(a,b) = 1 then a and b are coprime integers.
+
+If a and b are prime, they are also coprime. If a is prime and b < a then a and b are coprime.
+
+There are many tools to calculate the GCD of two integers, but for this task we recommend looking up Euclid's Algorithm.
+
+Try coding it up; it's only a couple of lines. Use a = 12, b = 8 to test it.
+
+Now calculate gcd(a,b) for a = 66528, b = 52920 and enter it below.
+
+##### Writeup:
+
+This challenge tells us to write a python script to calculate gcd using Euclid's Algorithm.
+
+In Euclid's Algorithm we find greatest common divisor of two numbers.
+
+In this algorithm we first divide the greatest number with smallest one and get the remainder.After that we divide the smaller number by remainder and get the new remainder.Continuing this process until we got remainder 0.
+When we got our remainder 0 the number which we divide recently is the our gcd.
+
+Here is the python script for this.
+
+```python
+#!/usr/bin/env python3
+def gcd(a,b):
+ while b != 0:
+  a,b = b,a%b
+ return a
+
+a =66528
+b =52920
+
+print (gcd(a,b))
+```
+```shell
+┌──(rinshu㉿kali)-[~]
+└─$ ./euclidean_algorithm.py   
+1512
+```
+Answer:- ***1512***
+
+---
+
+### Extended GCD
+
+##### Challenge Description:
+
+Let a and b be positive integers.
+
+The extended Euclidean algorithm is an efficient way to find integers u,v such that
+
+a * u + b * v = gcd(a,b)
+
+Using the two primes p = 26513, q = 32321, find the integers u,v such that
+
+p * u + q * v = gcd(p,q)
+
+Enter whichever of u and v is the lower number as the flag.
+
+##### Writeup:
+
+Now this challenge suggests us about extended Euclidean algorithm
+computes the greatest common divisor (GCD) of two integers 
+The Extended Euclidean Algorithm is an extension of the Euclidean Algorithm that not only computes the greatest common divisor (GCD) of two integers a and b but also finds the coefficients x and y such that:
+  ax+by=gcd(a,b)
+
+This is the python script to find the coefficient x and y
+```python
+#!/usr/bin/env python3
+def extended(a, b):
+ x0,x1,y0,y1 = 1,0,0,1
+
+ while b != 0:
+  q , a , b = a//b , b , a%b
+  x0 , x1 = x1 , x0 - q*x1
+  y0 , y1 = y1 , y0 - q*y1
+ return x0,y0
+a = 32321
+b = 26513
+x, y = extended(a, b)
+print (x,y)
+```
+```shell
+┌──(rinshu㉿kali)-[~]
+└─$ ./extended_euclidean_theorem   
+-8404 10245
+```
+Smallest one is the answer
+Answer:- ***-8404***
+
+---
+
+### Modular Arithmetic 1
+
+##### Challenge Description:
+
+Imagine you lean over and look at a cryptographer's notebook. You see some notes in the margin:
+
+4 + 9 = 1
+5 - 7 = 10
+2 + 3 = 5
+
+At first you might think they've gone mad. Maybe this is why there are so many data leaks nowadays you'd think, but this is nothing more than modular arithmetic modulo 12 (albeit with some sloppy notation).
+
+You may not have been calling it modular arithmetic, but you've been doing these kinds of calculations since you learnt to tell the time (look again at those equations and think about adding hours).
+
+Formally, "calculating time" is described by the theory of congruences. We say that two integers are congruent modulo m if a ≡ b mod m.
+
+Another way of saying this, is that when we divide the integer a by m, the remainder is b. This tells you that if m divides a (this can be written as m | a) then a ≡ 0 mod m.
+
+Calculate the following integers:
+
+11 ≡ x mod 6
+8146798528947 ≡ y mod 17
+
+The solution is the smaller of the two integers.
+
+##### Writeup:
+
+As mentioned in the challenge a ≡ b mod m means when a is divided by m we get the remainder b.
+
+To do this..
+```python
+#!/usr/bin/env python3
+x = 11%6
+y = 8146798528947%17
+print (x,y)
+
+```
+
+```shell
+┌──(rinshu㉿kali)-[~]
+└─$ ./mod.py                    
+5 4
+```
+Smallest number is our answer.
+
+Answer :- ***4***
+
+---
+
+### Modular Arithmetic 2
+
+##### Challenge Description:
+
+We'll pick up from the last challenge and imagine we've picked a modulus p, and we will restrict ourselves to the case when p is prime.
+
+The integers modulo p define a field, denoted F<sub>p</sub>.
+
+A finite field Fp is the set of integers {0,1,...,p-1}, and under both addition and multiplication there is an inverse element b for every element a in the set, such that a + b = 0 and a * b = 1.
+
+Lets say we pick p = 17. Calculate 3<sup>17</sup> mod 17. Now do the same but with 5<sup>17</sup> mod 17.
+
+What would you expect to get for 7<sup>16</sup> mod 17? Try calculating that.
+
+This interesting fact is known as Fermat's little theorem. We'll be needing this (and its generalisations) when we look at RSA cryptography.
+
+Now take the prime p = 65537. Calculate 273246787654<sup>65536</sup> mod 65537.
+
+Did you need a calculator?
+
+##### Writeup:
+
+This challenge suggests about Fermat's little theorem 
+It states that if p is a prime number and a is any integer such that a is not divisible by p, then:
+
+a<sup>p-1</sup> ≡ 1 (mod p)
+
+It means that a<sup>p-1</sup> is divided by p then the remainder is 1 if p is a prime and a is not divisbble by p.
+
+According to this theorem the answer to this question must be 1.
+
+Answer:- ***1***
+
+### Modular Inverting
+
+##### Challenge Description:
+
+As we've seen, we can work within a finite field F<sub>p</sub>, adding and multiplying elements, and always obtain another element of the field.
+
+For all elements g in the field, there exists a unique integer d such that g * d ≡ 1 mod p.
+
+This is the multiplicative inverse of g.
+
+Example: 7 * 8 = 56 ≡ 1 mod 11
+
+What is the inverse element: 3 * d ≡ 1 mod 13?
+
+##### Writeup:
+
+Now again challenge suggests us to  use the Fermat's little theorem to find the modular inverse.
+
+We know that a<sup>p-1</sup> ≡ 1 (mod p)
+
+Dividing both side by a : a<sup>p-2</sup> ≡ a<sup>-1</sup> (mod p)
+
+Hence the modular inverse of a is : a<sup>-1</sup> = a<sup>p-2</sup> (mod p)
+
+Here d = 3<sup>11</sup> (mod 13)
+
+d = 9
+
+Answer:- ***9***
+
+
