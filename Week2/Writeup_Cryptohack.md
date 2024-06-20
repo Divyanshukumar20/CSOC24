@@ -747,6 +747,8 @@ Answer: ***crypto{Biclique}***
 
 ### Structure of AES
 
+##### Challenge Description:
+
 To achieve a keyed permutation that is infeasible to invert without the key, AES applies a large number of ad-hoc mixing operations on the input. This is in stark contrast to public-key cryptosystems like RSA, which are based on elegant individual mathematical problems. AES is much less elegant, but it's very fast.
 
 At a high level, AES-128 begins with a "key schedule" and then runs 10 rounds over a state. The starting state is just the plaintext block that we want to encrypt, represented as a 4x4 matrix of bytes. Over the course of the 10 rounds, the state is repeatedly modified by a number of invertible transformations.
@@ -756,7 +758,7 @@ Included is a bytes2matrix function for converting our initial plaintext block i
 Challenge files:
   - [matrix.py](https://github.com/Divyanshukumar20/CSOC24/blob/main/Week2/Writeup_files/matrix_e1b463dddbee6d17959618cf370ff1a5.py)
 
-### Writeup:
+##### Writeup:
 
 As seen in the file we got a python script which is not completed.We havre to complete it.
 bytes2matrix is given we have to find the matrix2 bytes function.
