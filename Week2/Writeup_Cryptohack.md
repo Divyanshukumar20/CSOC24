@@ -838,3 +838,33 @@ Answer: ***19906***
 ### RSA Starter 2
 
 ##### Challenge Description:
+
+RSA encryption is modular exponentiation of a message with an exponent e and a modulus N which is normally a product of two primes: N = p * q.
+
+Together the exponent and modulus form an RSA "public key" (N, e). The most common value for e is 0x10001 or 65537.
+
+"Encrypt" the number 12 using the exponent e = 65537 and the primes p = 17 and q = 23. What number do you get as the ciphertext?
+
+##### Writeup:
+
+As we know in RSA the ciphertext encrypt using public key.
+
+ciphertext = (message)<sup>e</sup> mod n
+
+Here n = p*q = 17*23 = 391
+
+e = 65537
+
+ciphertext = 12<sup>65537</sup> mod 391
+
+```python
+#!/usr/bin/env python3
+result = pow (12,65537,17*23)
+print (result)
+```
+```shell
+┌──(rinshu㉿kali)-[~]
+└─$ ./encrypt.py   
+301
+```
+Answer = ***301***
