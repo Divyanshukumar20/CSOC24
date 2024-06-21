@@ -2,5 +2,5 @@
 
 ### Challenge Files:
 
-1. [source.enc](writeup_files/source.enc)
+1. [source.enc](Writeup_files/source.enc)
 2. [output.txt]()
